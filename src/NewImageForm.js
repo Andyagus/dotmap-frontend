@@ -25,10 +25,10 @@ export default class NewImageForm extends React.Component{
 		return(
 			<div className="form">
 				<form onSubmit={this.onSubmit}>
-					<label> Image Upload </label>
+					<p> upload image </p>
 					<input type="file" name="image" onChange={this.onChange}/>
 					<input type="submit"/>
-				</form>`
+				</form>
 			</div>
 		)
 	}

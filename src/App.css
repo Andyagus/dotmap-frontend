@@ -53,3 +53,25 @@
 .image-button img{
   width: 80%;
 }
+
+.side-drawer{
+  background-color: grey;
+  position: relative;
+  height: 100%;
+  width: 300px;
+}
+
+.sd-parent{
+  width: 100%;
+  height: 100%;
+}
+
+
+.marker-pop-up{
+  width: 10%;
+}
+
+.marker-pop-up img{
+  width: 40%;
+}
+
