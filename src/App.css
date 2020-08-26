@@ -36,3 +36,20 @@
     transform: rotate(360deg);
   }
 }
+
+
+.image-button{
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+
+}
+
+
+.marker-div{
+  width: 100%;
+}
+
+.image-button img{
+  width: 80%;
+}
