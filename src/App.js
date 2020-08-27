@@ -20,8 +20,10 @@ export default class App extends React.Component {
     },
     locations: [],
     selectedPark: null,
-    clickDraw: false
+    clickDraw: false,
+    selectedUser: ""
   }
+
 
 
   componentDidMount(){
@@ -30,6 +32,12 @@ export default class App extends React.Component {
     .then(resp => this.setState({locations: resp}))
   }
 
+  ListSelectHandler = (obj) => {
+    this.setState({selectedUser: obj.target.value})
+    fetch(`localhost:3000/users/${this.state.selectedUser}`)
+    .then(resp => resp.json())
+    .then(resp => this.setState({locations: resp}))
+  }
 
   sideDrawerClickHandler = () => {
     this.setState({clickDraw: !this.state.clickDraw})
@@ -57,7 +65,7 @@ export default class App extends React.Component {
       
       <button onClick={this.sideDrawerClickHandler}> {this.state.clickDraw ? "Hide SideBar" : "Show SideBar"}</button>
 
-      {this.state.clickDraw ? <SideDrawer /> : null }
+      {this.state.clickDraw ? <SideDrawer ListSelectHandler={this.ListSelectHandler}/> : null }
       
       
       {this.state.locations.map((location)=> (

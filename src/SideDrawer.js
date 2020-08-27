@@ -7,14 +7,13 @@ export default class SideDrawer extends React.Component{
 
 
 	render(){
-		console.log(this.state)
 		return(
 		<div className="sd-parent">	
 			<div className = "side-drawer">
 				
 				<NewImageForm />
 
-				<ListSelect />
+				<ListSelect ListSelectHandler={this.props.ListSelectHandler} />
 			</div>
 		</div>
 		)
