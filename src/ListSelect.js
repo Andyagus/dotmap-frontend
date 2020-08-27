@@ -15,8 +15,6 @@ export default class ListSelect extends React.Component{
 		.then(resp => this.setState({users: resp}))
 	}
 
-	changeHandler = (e) => {
-	}
 
 	render(){
 		return(

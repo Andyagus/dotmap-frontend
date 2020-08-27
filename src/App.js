@@ -1,12 +1,8 @@
-import React, {useState, useEffect} from 'react';
-import logo from './logo.svg';
-import PropTypes from "prop-types";
+import React from 'react';
 import './App.css';
 import ReactMapGL, {Marker, Popup} from "react-map-gl"
-import NewImageForm from "./NewImageForm"
 import SideDrawer from './SideDrawer'
 import ImageGallery from './ImageGallery'
-const baseUrl = "http://localhost:3000/images"
 
 export default class App extends React.Component {
 
@@ -21,22 +17,16 @@ export default class App extends React.Component {
     locations: [],
     selectedPark: null,
     clickDraw: false,
-    selectedUser: ""
+    currentUser: ""
   }
 
-
-
-  componentDidMount(){
-    fetch("http://localhost:3000/landmarks")
-    .then(resp=> resp.json())
-    .then(resp => this.setState({locations: resp}))
-  }
 
   ListSelectHandler = (obj) => {
-    this.setState({selectedUser: obj.target.value})
-    fetch(`localhost:3000/users/${this.state.selectedUser}`)
+    fetch(`http://localhost:3000/users/${obj.target.value}`)
     .then(resp => resp.json())
-    .then(resp => this.setState({locations: resp}))
+    .then(resp => this.setState({locations: resp}),
+    this.setState({currentUser: obj.target.value}, console.log(this.state.currentUser)))
+      
   }
 
   sideDrawerClickHandler = () => {
@@ -49,8 +39,21 @@ export default class App extends React.Component {
   }
 
 
-  render(){
+  NewImageFormSubmit = (e) => {
+    console.log(e)
+    const form =  new FormData()
+    form.append("image", e)
+    form.append("user", this.state.currentUser)
+    fetch(`http://localhost:3000/images`,{
+      method:"POST",
+      body: form
+      })
+    .then(resp => resp.json())
+    .then(console.log)
+  }
 
+
+  render(){
     return (
  
     <div>
@@ -65,7 +68,7 @@ export default class App extends React.Component {
       
       <button onClick={this.sideDrawerClickHandler}> {this.state.clickDraw ? "Hide SideBar" : "Show SideBar"}</button>
 
-      {this.state.clickDraw ? <SideDrawer ListSelectHandler={this.ListSelectHandler}/> : null }
+      {this.state.clickDraw ? <SideDrawer NewImageFormSubmit={this.NewImageFormSubmit} ListSelectHandler={this.ListSelectHandler}/> : null }
       
       
       {this.state.locations.map((location)=> (

@@ -10,21 +10,15 @@ export default class NewImageForm extends React.Component{
 		this.setState({image: e.target.files[0]})
 	}
 
-	onSubmit = (e) => {
+	submitHandler = (e) => {
 		e.preventDefault()
-		const form =  new FormData()
-		form.append("image", this.state.image)
-		console.log(form)
-		fetch(`http://localhost:3000/images`,{
-			method:"POST",
-			body: form
-			})
+		this.props.NewImageFormSubmit(this.state.image)
 	}
 
 	render(){
 		return(
 			<div className="form">
-				<form onSubmit={this.onSubmit}>
+				<form onSubmit={this.submitHandler}>
 					<p> upload image </p>
 					<input type="file" name="image" onChange={this.onChange}/>
 					<input type="submit"/>
