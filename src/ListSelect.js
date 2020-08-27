@@ -1,32 +1,63 @@
 import React from 'react'
-const baseUrl = "http://localhost:3000/users"
+const baseUrl = "http://localhost:3000/lists"
 
 export default class ListSelect extends React.Component{
 	
 	state = {
-		users: [],
+		lists: [],
 		selectedUser: "",
-		currentLandmarks: []
+		currentLandmarks: [],
+		list: ""
 	}
 
 	componentDidMount(){
-		fetch("http://localhost:3000/users/")
+		fetch("http://localhost:3000/lists/")
 		.then(resp => resp.json())
-		.then(resp => this.setState({users: resp}))
+		.then(resp => this.setState({lists: resp}))
+		this.forceUpdate()
 	}
 
+	submitHandler = (e) => {
+		e.preventDefault()
+		this.setState({list: e.target.value})
+		const form =  new FormData()
+    form.append("name", this.state.list)
+    fetch(`http://localhost:3000/lists`,{
+      method:"POST",
+      body: form
+      })
+    .then(resp => resp.json())
+    .then(resp => {
+    	let newArr = [...this.state.lists, resp]
+    	console.log(newArr)
+    	this.setState({lists: newArr})
+    })
+		
+
+	}
 
 	render(){
 		return(
+		<div>
 			<div> 
 				<h4> Your Lists </h4>
 				<select onChange={(e) => {
 					this.props.ListSelectHandler(e)
 					}}>
-				  {this.state.users.map(user => <option value={user.id}>{user.username}</option>)}
+				  {this.state.lists.map(user => <option value={user.id}>{user.name}</option>)}
 				</select>
-				<button> Create New List </button>
 			</div>
+			<form onSubmit={(e)=>{
+				this.submitHandler(e)
+				}}> 
+				<p> Create New List </p>
+  			<input type="text" value={this.state.list} onChange={(e)=>{
+  				this.setState({list: e.target.value})
+  				}}/>
+  			<input type="submit" value="Submit" />
+
+			</form>
+		</div>
 		)
 	}
 }

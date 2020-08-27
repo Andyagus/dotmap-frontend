@@ -17,15 +17,15 @@ export default class App extends React.Component {
     locations: [],
     selectedPark: null,
     clickDraw: false,
-    currentUser: ""
+    currentList: ""
   }
 
 
   ListSelectHandler = (obj) => {
-    fetch(`http://localhost:3000/users/${obj.target.value}`)
+    fetch(`http://localhost:3000/lists/${obj.target.value}`)
     .then(resp => resp.json())
     .then(resp => this.setState({locations: resp}),
-    this.setState({currentUser: obj.target.value}, console.log(this.state.currentUser)))
+    this.setState({currentList: obj.target.value}))
       
   }
 
@@ -40,16 +40,19 @@ export default class App extends React.Component {
 
 
   NewImageFormSubmit = (e) => {
-    console.log(e)
     const form =  new FormData()
     form.append("image", e)
-    form.append("user", this.state.currentUser)
+    form.append("list", this.state.currentList)
     fetch(`http://localhost:3000/images`,{
       method:"POST",
       body: form
       })
-    .then(resp => resp.json())
-    .then(console.log)
+    .then(resp => resp.json())    
+    .then(resp => {
+      console.log(resp)
+      let newArr = [...this.state.locations, resp]
+      this.setState({locations: newArr})
+    })
   }
 
 
