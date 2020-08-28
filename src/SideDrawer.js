@@ -10,7 +10,7 @@ export default class SideDrawer extends React.Component{
 		return(
 		<div className="sd-parent">	
 			<div className = "side-drawer">
-				
+
 				<NewImageForm NewImageFormSubmit={this.props.NewImageFormSubmit}/>
 
 				<ListSelect ListSelectHandler={this.props.ListSelectHandler} />
