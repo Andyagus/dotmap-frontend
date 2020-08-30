@@ -62,7 +62,9 @@ export default class App extends React.Component {
       console.log(resp)
       let newArr = [...this.state.locations, resp]
       this.setState({locations: newArr})
-      this.setState({selectedPark: resp})
+      this.setState({selectedPark: resp}, ()=>{
+        this.goToViewport(this.state.selectedPark.longitude, this.state.selectedPark.latitude)
+      })
     })
   }
 
@@ -71,7 +73,7 @@ export default class App extends React.Component {
     this._onViewportChange({
       longitude: long,
       latitude: lat,
-      zoom: 15,
+      zoom: 4,
       transitionInterpolator: new FlyToInterpolator({speed: 2.5}),
       transitionDuration: 'auto'
     });
