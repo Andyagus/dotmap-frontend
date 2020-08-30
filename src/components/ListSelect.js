@@ -51,13 +51,13 @@ export default class ListSelect extends React.Component{
 			<form onSubmit={(e)=>{
 				this.submitHandler(e)
 				}}> 
-				<p> Create New List </p>
-  			<input type="text" value={this.state.list} onChange={(e)=>{
+  			<input type="text" placeholder="New List" value={this.state.list} onChange={(e)=>{
   				this.setState({list: e.target.value})
   				}}/>
   			<input type="submit" value="Submit" />
 
 			</form>
+			<h1> {this.state.list.name} </h1>
 		</div>
 		)
 	}

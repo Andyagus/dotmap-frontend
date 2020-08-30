@@ -31,6 +31,12 @@ export default class App extends React.Component {
   }
 
 
+  numListChoice = (obj) => {
+    this.setState({selectedPark: obj}, ()=>{
+        this.goToViewport(this.state.selectedPark.longitude, this.state.selectedPark.latitude)
+      })
+  }
+
   ListSelectHandler = (obj) => {
     fetch(`http://localhost:3000/lists/${obj.target.value}`)
     .then(resp => resp.json())
@@ -73,7 +79,7 @@ export default class App extends React.Component {
     this._onViewportChange({
       longitude: long,
       latitude: lat,
-      zoom: 4,
+      zoom: 12,
       transitionInterpolator: new FlyToInterpolator({speed: 2.5}),
       transitionDuration: 'auto'
     });
@@ -86,6 +92,7 @@ export default class App extends React.Component {
 
 
   render(){
+    console.log(this.state.locations)
     const {viewport, settings} = this.state;
 
     return (
@@ -102,7 +109,7 @@ export default class App extends React.Component {
 
       <button onClick={this.sideDrawerClickHandler}> {this.state.clickDraw ? "Hide SideBar" : "Show SideBar"}</button>
 
-      {this.state.clickDraw ? <SideDrawer NewImageFormSubmit={this.NewImageFormSubmit} goToViewport={this.goToViewport} ListSelectHandler={this.ListSelectHandler}/> : null }
+      {this.state.clickDraw ? <SideDrawer locations={this.state.locations} NewImageFormSubmit={this.NewImageFormSubmit} goToViewport={this.goToViewport} ListSelectHandler={this.ListSelectHandler} numListChoice={this.numListChoice}/> : null }
       
       
       {this.state.locations.map((location)=> (

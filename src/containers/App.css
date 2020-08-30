@@ -76,3 +76,18 @@
   width: 40%;
 }
 
+.location-list p{
+  display: inline-block;
+  margin-right: 10px
+}
+.location-list h4 {
+  display: inline-block;
+}
+
+.active-link {
+  text-decoration: underline;
+}
+
+.passive-link{
+  text-decoration: none;
+}
