@@ -56,6 +56,8 @@ export default class App extends React.Component {
   }
 
 
+  
+
   NewImageFormSubmit = (e) => {
     const form =  new FormData()
     form.append("image", e)
