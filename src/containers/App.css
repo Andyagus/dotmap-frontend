@@ -39,11 +39,13 @@
 
 
 .image-button{
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
+  width: 200px;
 
 }
+
+
+.image-button img{
+width:100%;}
 
 .marker-pop-up{
 

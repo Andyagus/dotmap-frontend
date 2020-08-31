@@ -5,14 +5,15 @@ import SideDrawer from './SideDrawer'
 import ImageGallery from './ImageGallery'
 import 'mapbox-gl/dist/mapbox-gl.css';
 
+
 export default class App extends React.Component {
 
 
 
   state = {
     viewport: {
-    latitude: 48.858461,
-    longitude: 2.294351,
+    latitude: 40.705726,
+    longitude: -73.996953,
     width: '100vw',
     height: '100vh',
     zoom: 4
@@ -20,15 +21,13 @@ export default class App extends React.Component {
     locations: [],
     selectedPark: "",
     clickDraw: true,
-    currentList: ""
+    currentList: {}
   }
 
 
 
   componentDidMount(){
-    fetch(`http://localhost:3000/lists/1`)
-    .then(resp => resp.json())
-    .then(resp => this.setState({locations: resp}))
+
   }
 
 
@@ -46,6 +45,16 @@ export default class App extends React.Component {
     this.setState({viewport: {...this.state.viewport}})
   }
 
+  firstListRender = (list) => {
+      console.log(list.id)
+      this.setState({currentList: list.id})
+      fetch(`http://localhost:3000/lists/${list.id}`)
+      .then(resp => resp.json())
+      .then(resp => this.setState({locations: resp}),
+      this.setState({currentList: list.id}))
+      this.setState({viewport: {...this.state.viewport}})
+  }
+
   sideDrawerClickHandler = () => {
     this.setState({clickDraw: !this.state.clickDraw})
   }
@@ -56,7 +65,7 @@ export default class App extends React.Component {
   }
 
 
-  
+
 
   NewImageFormSubmit = (e) => {
     const form =  new FormData()
@@ -82,7 +91,7 @@ export default class App extends React.Component {
     this._onViewportChange({
       longitude: long,
       latitude: lat,
-      zoom: 5,
+      zoom: 15,
       transitionInterpolator: new FlyToInterpolator({speed: 2.5}),
       transitionDuration: 'auto'
     });
@@ -112,7 +121,7 @@ export default class App extends React.Component {
 
       <button onClick={this.sideDrawerClickHandler}> {this.state.clickDraw ? "Hide SideBar" : "Show SideBar"}</button>
 
-      {this.state.clickDraw ? <SideDrawer locations={this.state.locations} NewImageFormSubmit={this.NewImageFormSubmit} goToViewport={this.goToViewport}  ListSelectHandler={this.ListSelectHandler} numListChoice={this.numListChoice}/> : null }
+      {this.state.clickDraw ? <SideDrawer locations={this.state.locations} NewImageFormSubmit={this.NewImageFormSubmit} firstListRender={this.firstListRender} goToViewport={this.goToViewport}  ListSelectHandler={this.ListSelectHandler} numListChoice={this.numListChoice}/> : null }
       
       
       {this.state.locations.map((location)=> (
@@ -123,7 +132,9 @@ export default class App extends React.Component {
               () => {this.goToViewport(this.state.selectedPark.longitude, this.state.selectedPark.latitude)}
             )
             }}>
-            
+            <div> 
+            <img src={location.images[0].image_url} />
+            </div>
           </button>
         </Marker>
         ))}

@@ -13,7 +13,9 @@ export default class ListSelect extends React.Component{
 	componentDidMount(){
 		fetch("http://localhost:3000/lists/")
 		.then(resp => resp.json())
-		.then(resp => this.setState({lists: resp}))
+		.then(resp => this.setState({lists: resp},
+			() => {this.props.firstListRender(this.state.lists[0])}
+		))
 
 	}
 
