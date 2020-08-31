@@ -110,7 +110,7 @@ export default class App extends React.Component {
 
       <button onClick={this.sideDrawerClickHandler}> {this.state.clickDraw ? "Hide SideBar" : "Show SideBar"}</button>
 
-      {this.state.clickDraw ? <SideDrawer locations={this.state.locations} NewImageFormSubmit={this.NewImageFormSubmit} goToViewport={this.goToViewport} ListSelectHandler={this.ListSelectHandler} numListChoice={this.numListChoice}/> : null }
+      {this.state.clickDraw ? <SideDrawer locations={this.state.locations} NewImageFormSubmit={this.NewImageFormSubmit} goToViewport={this.goToViewport}  ListSelectHandler={this.ListSelectHandler} numListChoice={this.numListChoice}/> : null }
       
       
       {this.state.locations.map((location)=> (

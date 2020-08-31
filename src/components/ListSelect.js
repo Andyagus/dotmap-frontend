@@ -14,7 +14,7 @@ export default class ListSelect extends React.Component{
 		fetch("http://localhost:3000/lists/")
 		.then(resp => resp.json())
 		.then(resp => this.setState({lists: resp}))
-		this.forceUpdate()
+
 	}
 
 	submitHandler = (e) => {
