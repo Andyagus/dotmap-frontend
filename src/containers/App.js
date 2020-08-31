@@ -125,6 +125,7 @@ export default class App extends React.Component {
       
       
       {this.state.locations.map((location)=> (
+        <div> 
         <Marker latitude={location.latitude} longitude={location.longitude} offsetLeft={-20} offsetTop={-10}>
           <button className="image-button" onClick={(e)=> {
             e.preventDefault()
@@ -132,11 +133,10 @@ export default class App extends React.Component {
               () => {this.goToViewport(this.state.selectedPark.longitude, this.state.selectedPark.latitude)}
             )
             }}>
-            <div> 
-            <img src={location.images[0].image_url} />
-            </div>
+            <img src={process.env.PUBLIC_URL + '/room.svg'} alt="marker icon" />
           </button>
         </Marker>
+        </div>
         ))}
         {this.state.selectedPark ? (
           <Popup  className = "marker-pop-up" latitude={this.state.selectedPark.latitude} 
