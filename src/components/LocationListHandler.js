@@ -26,7 +26,7 @@ export default class LocationListHandler extends React.Component{
 					<p> {num}</p>
 					<h4   
 
-					className={this.state.selectedLocation === this.props.location ? 'active-link': 'passive-link'} 
+					className={this.state.selectedLocation ? 'active-link': 'passive-link'} 
 					onClick={() => {this.clickHandler()}}> 
 					{locationName}  
 				</h4>

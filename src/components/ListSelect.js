@@ -32,8 +32,6 @@ export default class ListSelect extends React.Component{
     	console.log(newArr)
     	this.setState({lists: newArr})
     })
-		
-
 	}
 
 	render(){
@@ -42,6 +40,10 @@ export default class ListSelect extends React.Component{
 		<div>
 			<div> 
 				<h4> Your Lists </h4>
+				<button onClick={() => {
+					alert("share with other user choose user from dropdown list to share with")
+					}}> share list </button>
+
 				<select onChange={(e) => {
 					this.props.ListSelectHandler(e)
 					}}>
@@ -57,7 +59,6 @@ export default class ListSelect extends React.Component{
   			<input type="submit" value="Submit" />
 
 			</form>
-			<h1> {this.state.list.name} </h1>
 		</div>
 		)
 	}

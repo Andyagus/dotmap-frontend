@@ -45,13 +45,11 @@
 
 }
 
+.marker-pop-up{
 
-.marker-div{
-  width: 100%;
 }
 
-.image-button img{
-  width: 80%;
+.marker-div{
 }
 
 .side-drawer{
@@ -69,11 +67,11 @@
 
 
 .marker-pop-up{
-  width: 10%;
+  width: 20%;
 }
 
 .marker-pop-up img{
-  width: 40%;
+  width: 100%;
 }
 
 .location-list p{
@@ -90,4 +88,8 @@
 
 .passive-link{
   text-decoration: none;
+}
+
+.image-gallery{
+  width: 100%;
 }

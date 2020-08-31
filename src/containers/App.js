@@ -3,6 +3,7 @@ import './App.css';
 import ReactMapGL, {Marker, Popup, FlyToInterpolator} from "react-map-gl"
 import SideDrawer from './SideDrawer'
 import ImageGallery from './ImageGallery'
+import 'mapbox-gl/dist/mapbox-gl.css';
 
 export default class App extends React.Component {
 
@@ -79,7 +80,7 @@ export default class App extends React.Component {
     this._onViewportChange({
       longitude: long,
       latitude: lat,
-      zoom: 12,
+      zoom: 5,
       transitionInterpolator: new FlyToInterpolator({speed: 2.5}),
       transitionDuration: 'auto'
     });
@@ -119,8 +120,7 @@ export default class App extends React.Component {
             this.setState({selectedPark: location},
               () => {this.goToViewport(this.state.selectedPark.longitude, this.state.selectedPark.latitude)}
             )
-
-            }}><img src={location.image_url} width="10%"/>
+            }}>
             
           </button>
         </Marker>
@@ -132,11 +132,11 @@ export default class App extends React.Component {
             this.setState({selectedPark: ""},)
             }} 
           >
-            <div className="marker-div"> 
-              <h4> {this.state.selectedPark.name} </h4>
-              <img src={this.state.selectedPark.image_url}/>
-              <ImageGallery selectedPark = {this.state.selectedPark}/>
-
+            <div> 
+              <div className="marker-div"> 
+                <h4> {this.state.selectedPark.name} </h4>
+                <ImageGallery selectedPark = {this.state.selectedPark}/>
+              </div>
             </div>
           </Popup>
         ) : null}
