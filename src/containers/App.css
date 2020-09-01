@@ -61,26 +61,47 @@ width:100%;
 }
 
 .side-drawer{
+
   background-color: grey;
-  position: relative;
   height: 100%;
   width: 300px;
+
   padding: 30px;
 }
 
-.sd-parent{
-  width: 100%;
+.right-side-drawer{
+  background-color: grey;
+  position: relative;
+  float: right;
+  width: 300px;
   height: 100%;
+  padding: 20px;
+}
+
+
+.sd-parent{
+  width: 20%;
+  height: 100%;
+  position: relative;
+  float: left;
+  display: inline;
+}
+
+
+.sd-parent-right{
+  width: 20%;
+  height: 100%;
+  position: relative;
+  float: right;
+  display: inline;
 }
 
 
 .marker-pop-up{
-  width: 20%;
+  background-color: none;
 }
 
-.marker-pop-up img{
-  width: 100%;
-}
+
 
 .location-list p{
   display: inline-block;
@@ -100,4 +121,14 @@ width:100%;
 
 .image-gallery{
   width: 100%;
+}
+
+.sp-description{
+  font-size: 14px;
+}
+
+model-viewer {
+  width: 200px;
+  height: 200px;
+  text-align: center;
 }

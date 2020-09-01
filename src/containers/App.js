@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import ReactMapGL, {Marker, Popup, FlyToInterpolator} from "react-map-gl"
 import SideDrawer from './SideDrawer'
-import ImageGallery from './ImageGallery'
+import RightSideDrawer from './RightSideDrawer'
 import 'mapbox-gl/dist/mapbox-gl.css';
 
 
@@ -19,15 +19,18 @@ export default class App extends React.Component {
     zoom: 4
     },
     locations: [],
-    selectedPark: "",
+    selectedPark: null,
     clickDraw: true,
-    currentList: {}
+    currentList: {},
+    armodel: []
   }
 
 
-
   componentDidMount(){
-
+    // const API_KEY = 'AIzaSyD6scPIQ_u-_5E62s6mYDvEt5vkWTHE0R4';    
+    // fetch("https://poly.googleapis.com/v1/assets?keywords=mountain&format=gltf&key=AIzaSyD6scPIQ_u-_5E62s6mYDvEt5vkWTHE0R4")
+    // .then(response => response.json())
+    // .then(response => this.setState({armodel: response}))
   }
 
 
@@ -46,7 +49,6 @@ export default class App extends React.Component {
   }
 
   firstListRender = (list) => {
-      console.log(list.id)
       this.setState({currentList: list.id})
       fetch(`http://localhost:3000/lists/${list.id}`)
       .then(resp => resp.json())
@@ -77,7 +79,6 @@ export default class App extends React.Component {
       })
     .then(resp => resp.json())    
     .then(resp => {
-      console.log(resp)
       let newArr = [...this.state.locations, resp]
       this.setState({locations: newArr})
       this.setState({selectedPark: resp}, ()=>{
@@ -102,42 +103,64 @@ export default class App extends React.Component {
       viewport: {...this.state.viewport, ...viewport}
     });
 
+  findModel = () => {
+    let armodel = this.state.armodel.assets
+    armodel = armodel.find(a => a.displayName.includes("bear"))
+    console.log(armodel)
+    armodel = armodel.formats.find(a => a.formatType.includes("GLTF2"))
+    console.log(armodel.root.url)
+    return armodel.root.url
+  }
+
+  fetchLocations = (name) => {
+    fetch(`https://poly.googleapis.com/v1/assets?keywords=${name}&format=gltf&key=AIzaSyD6scPIQ_u-_5E62s6mYDvEt5vkWTHE0R4`)
+    .then(resp => resp.json())
+    .then(resp => this.setState({armodel: resp}))
+  }
+
 
   render(){
-    console.log(this.state.locations)
-    const {viewport, settings} = this.state;
-
+    console.log(this.state)
     return (
- 
     <div>
       <ReactMapGL
         {...this.state.viewport}
         mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
         //mapStyle="mapbox://styles/reckoner655/ckea4ate26ngo19mpumbc4brw"
-        
         onViewportChange={this._onViewportChange}
-
       >
 
       <button onClick={this.sideDrawerClickHandler}> {this.state.clickDraw ? "Hide SideBar" : "Show SideBar"}</button>
-
+      
       {this.state.clickDraw ? <SideDrawer locations={this.state.locations} NewImageFormSubmit={this.NewImageFormSubmit} firstListRender={this.firstListRender} goToViewport={this.goToViewport}  ListSelectHandler={this.ListSelectHandler} numListChoice={this.numListChoice}/> : null }
       
-      
+      {this.state.selectedPark ? <RightSideDrawer selectedPark={this.state.selectedPark}/> : null}
+
+
       {this.state.locations.map((location)=> (
         <div> 
-        <Marker latitude={location.latitude} longitude={location.longitude} offsetLeft={-20} offsetTop={-10}>
-          <button className="image-button" onClick={(e)=> {
+
+      {this.fetchLocations("bear")}
+
+
+
+
+        <Marker latitude={location.latitude} longitude={location.longitude}>
+
+        <div onClick={(e)=> {
             e.preventDefault()
             this.setState({selectedPark: location},
               () => {this.goToViewport(this.state.selectedPark.longitude, this.state.selectedPark.latitude)}
             )
-            }}>
-            <img src={process.env.PUBLIC_URL + '/room.svg'} alt="marker icon" />
-          </button>
+            }}> 
+          <model-viewer  className={"mview-app"} src={this.findModel()}
+              auto-rotate >
+          </model-viewer>         
+        </div>
         </Marker>
         </div>
         ))}
+
         {this.state.selectedPark ? (
           <Popup  className = "marker-pop-up" latitude={this.state.selectedPark.latitude} 
           longitude={this.state.selectedPark.longitude}
@@ -148,7 +171,6 @@ export default class App extends React.Component {
             <div> 
               <div className="marker-div"> 
                 <h4> {this.state.selectedPark.name} </h4>
-                <ImageGallery selectedPark = {this.state.selectedPark}/>
               </div>
             </div>
           </Popup>

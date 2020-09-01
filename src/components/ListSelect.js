@@ -1,5 +1,4 @@
 import React from 'react'
-const baseUrl = "http://localhost:3000/lists"
 
 export default class ListSelect extends React.Component{
 	

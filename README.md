@@ -1,3 +1,11 @@
+
+						<model-viewer className={"mview-rh"} src={process.env.PUBLIC_URL + '/reflective-sphere.gltf'} 
+							ar
+              auto-rotate camera-controls
+              background-color="#70BCD1"
+              shadow-intensity="1">
+						</model-viewer>
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts

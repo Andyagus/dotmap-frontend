@@ -5,7 +5,7 @@ import { Carousel } from 'react-responsive-carousel';
 
 export default class ImageGallery extends React.Component{
 	render(){
-		let images = this.props.selectedPark.images.map((image, index) => <ImageCard index={index} image={image}/>)
+		let images = this.props.images.map((image, index) => <ImageCard index={index} image={image}/>)
 		return(
 			<div className={"image-gallery"}>
 			<Carousel>

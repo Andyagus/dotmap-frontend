@@ -2,9 +2,7 @@ import React from 'react'
 import LocationListHandler from './LocationListHandler'
 
 export default class RenderLocationList extends React.Component{
-	render(){
-		 console.log(this.props)
-		 
+	render(){		 
 		const updatedLocations = Array.from(new Set(this.props.locations.map(a => a.id)))
  				.map(id => {
    		return this.props.locations.find(a => a.id === id)
