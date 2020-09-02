@@ -22,15 +22,27 @@ export default class App extends React.Component {
     selectedPark: null,
     clickDraw: true,
     currentList: {},
-    armodel: []
+    armodel: [],
+    modelUrl: []
   }
 
 
   componentDidMount(){
-    // const API_KEY = 'AIzaSyD6scPIQ_u-_5E62s6mYDvEt5vkWTHE0R4';    
-    // fetch("https://poly.googleapis.com/v1/assets?keywords=mountain&format=gltf&key=AIzaSyD6scPIQ_u-_5E62s6mYDvEt5vkWTHE0R4")
-    // .then(response => response.json())
-    // .then(response => this.setState({armodel: response}))
+    this.state.locations.map(location => {
+    fetch(`https://poly.googleapis.com/v1/assets?keywords=bear&format=gltf&key=AIzaSyD6scPIQ_u-_5E62s6mYDvEt5vkWTHE0R4`)
+    .then(resp => resp.json())
+    .then(resp => {
+    let armodel = resp.assets
+    armodel = armodel.find(a => a.displayName.includes("bear"))
+    armodel = armodel.formats.find(a => a.formatType.includes("GLTF2"))
+    let root = armodel.root.url
+    let arr = [...this.state.modelUrl, resp]
+    this.setState({modelUrl: arr})
+    }
+    )
+    })
+
+
   }
 
 
@@ -70,21 +82,7 @@ export default class App extends React.Component {
 
 
   NewImageFormSubmit = (e) => {
-    const form =  new FormData()
-    form.append("image", e)
-    form.append("list", this.state.currentList)
-    fetch(`http://localhost:3000/images`,{
-      method:"POST",
-      body: form
-      })
-    .then(resp => resp.json())    
-    .then(resp => {
-      let newArr = [...this.state.locations, resp]
-      this.setState({locations: newArr})
-      this.setState({selectedPark: resp}, ()=>{
-        this.goToViewport(this.state.selectedPark.longitude, this.state.selectedPark.latitude)
-      })
-    })
+    
   }
 
 
@@ -103,24 +101,31 @@ export default class App extends React.Component {
       viewport: {...this.state.viewport, ...viewport}
     });
 
-  findModel = () => {
-    let armodel = this.state.armodel.assets
+  
+
+  fetchModels = (name) => {
+    fetch(`https://poly.googleapis.com/v1/assets?keywords=bear&format=gltf&key=AIzaSyD6scPIQ_u-_5E62s6mYDvEt5vkWTHE0R4`)
+    .then(resp => resp.json())
+    .then(resp => {
+    let armodel = resp.assets
     armodel = armodel.find(a => a.displayName.includes("bear"))
-    console.log(armodel)
     armodel = armodel.formats.find(a => a.formatType.includes("GLTF2"))
-    console.log(armodel.root.url)
-    return armodel.root.url
+    let root = armodel.root.url
+    let arr = [...this.state.modelUrl, resp]
+    this.setState({modelUrl: arr})
+    }
+ 
+    )
   }
 
-  fetchLocations = (name) => {
-    fetch(`https://poly.googleapis.com/v1/assets?keywords=${name}&format=gltf&key=AIzaSyD6scPIQ_u-_5E62s6mYDvEt5vkWTHE0R4`)
-    .then(resp => resp.json())
-    .then(resp => this.setState({armodel: resp}))
-  }
 
 
   render(){
+    
+
+    
     console.log(this.state)
+
     return (
     <div>
       <ReactMapGL
@@ -138,22 +143,20 @@ export default class App extends React.Component {
 
 
       {this.state.locations.map((location)=> (
+
+        
         <div> 
 
-      {this.fetchLocations("bear")}
 
-
-
-
+     
         <Marker latitude={location.latitude} longitude={location.longitude}>
-
         <div onClick={(e)=> {
             e.preventDefault()
             this.setState({selectedPark: location},
               () => {this.goToViewport(this.state.selectedPark.longitude, this.state.selectedPark.latitude)}
             )
             }}> 
-          <model-viewer  className={"mview-app"} src={this.findModel()}
+          <model-viewer className={"mview-app"} src={this.fetchModels)}
               auto-rotate >
           </model-viewer>         
         </div>
