@@ -82,7 +82,21 @@ export default class App extends React.Component {
 
 
   NewImageFormSubmit = (e) => {
-    
+    const form =  new FormData()
+    form.append("image", e)
+    form.append("list", this.state.currentList)
+    fetch(`http://localhost:3000/images`,{
+      method:"POST",
+      body: form
+      })
+    .then(resp => resp.json())    
+    .then(resp => {
+      let newArr = [...this.state.locations, resp]
+      this.setState({locations: newArr})
+      this.setState({selectedPark: resp}, ()=>{
+        this.goToViewport(this.state.selectedPark.longitude, this.state.selectedPark.latitude)
+      })
+    })
   }
 
 
@@ -156,7 +170,7 @@ export default class App extends React.Component {
               () => {this.goToViewport(this.state.selectedPark.longitude, this.state.selectedPark.latitude)}
             )
             }}> 
-          <model-viewer className={"mview-app"} src={this.fetchModels)}
+          <model-viewer className={"mview-app"} src={location.model_url}
               auto-rotate >
           </model-viewer>         
         </div>
