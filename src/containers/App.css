@@ -64,7 +64,7 @@ width:100%;
 
   background-color: grey;
   height: 100%;
-  width: 300px;
+  width: 320px;
 
   padding: 30px;
 }
@@ -130,5 +130,6 @@ width:100%;
 model-viewer {
   width: 200px;
   height: 200px;
+  float: left;
   text-align: center;
 }

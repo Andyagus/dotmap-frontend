@@ -19,7 +19,7 @@ export default class NewImageForm extends React.Component{
 		return(
 			<div className="form">
 				<form onSubmit={this.submitHandler}>
-					<p> upload image </p>
+					<p> New Landmark </p>
 					<input type="file" name="image" onChange={this.onChange}/>
 					<input type="submit"/>
 				</form>
