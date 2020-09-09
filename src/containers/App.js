@@ -104,7 +104,7 @@ export default class App extends React.Component {
     this._onViewportChange({
       longitude: long,
       latitude: lat,
-      zoom: 15,
+      zoom: 16,
       transitionInterpolator: new FlyToInterpolator({speed: 2.5}),
       transitionDuration: 'auto'
     });
