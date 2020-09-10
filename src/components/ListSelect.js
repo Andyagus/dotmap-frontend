@@ -31,7 +31,10 @@ export default class ListSelect extends React.Component{
     .then(resp => {
     	let newArr = [...this.state.lists, resp]
     	console.log(newArr)
-    	this.setState({lists: newArr})
+    	this.setState({lists: newArr},
+    	this.setState({list: ""}),
+    	this.props.renderCurrentList(resp.id)
+    	)
     })
 	}
 

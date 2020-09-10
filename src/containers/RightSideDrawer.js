@@ -11,9 +11,6 @@ export default class RightSideDrawer extends React.Component{
 		return(
 				<div className="sd-parent-right">
 					<div className="right-side-drawer">
-					<model-viewer className={"mview-app"} src={this.props.selectedPark.model_url}
-              auto-rotate camera-controls >
-          </model-viewer>   
 						<ImageGallery images={this.props.selectedPark.images}/>
 
 						<h3> {this.props.selectedPark.name} </h3>

@@ -13,10 +13,12 @@ export default class App extends React.Component {
   state = {
     viewport: {
     latitude: 40.705726,
-    longitude: -73.996953,
+    longitude: -92.328801,
     width: '100vw',
     height: '100vh',
-    zoom: 4
+    zoom: 4,
+    detailClick: false,
+    infoClick: false
     },
     locations: [],
     selectedPark: null,
@@ -99,6 +101,12 @@ export default class App extends React.Component {
     })
   }
 
+  renderCurrentList = (obj) => {
+    this.setState({
+      currentList: obj
+    },
+    console.log(obj))
+  }
 
   goToViewport = (long, lat) => {
     this._onViewportChange({
@@ -110,6 +118,16 @@ export default class App extends React.Component {
     });
   };
   
+  zoomOuter = () => {
+      this._onViewportChange({
+        latitude: 40.705726,
+        longitude: -92.328801,
+        zoom: 3,
+        transitionInterpolator: new FlyToInterpolator({speed: 2.5}),
+        transitionDuration: 'auto'
+      });
+  };
+
   _onViewportChange = viewport =>
     this.setState({
       viewport: {...this.state.viewport, ...viewport}
@@ -151,7 +169,7 @@ export default class App extends React.Component {
 
       <button onClick={this.sideDrawerClickHandler}> {this.state.clickDraw ? "Hide SideBar" : "Show SideBar"}</button>
       
-      {this.state.clickDraw ? <SideDrawer locations={this.state.locations} NewImageFormSubmit={this.NewImageFormSubmit} firstListRender={this.firstListRender} goToViewport={this.goToViewport}  ListSelectHandler={this.ListSelectHandler} numListChoice={this.numListChoice}/> : null }
+      {this.state.clickDraw ? <SideDrawer locations={this.state.locations} NewImageFormSubmit={this.NewImageFormSubmit} firstListRender={this.firstListRender} goToViewport={this.goToViewport}  ListSelectHandler={this.ListSelectHandler} renderCurrentList={this.renderCurrentList} numListChoice={this.numListChoice}/> : null }
       
       {this.state.selectedPark ? <RightSideDrawer selectedPark={this.state.selectedPark}/> : null}
 
@@ -171,7 +189,25 @@ export default class App extends React.Component {
             )
             }}> 
           <model-viewer className={"mview-app"} src={location.model_url}
-              auto-rotate >
+              camera-controls >
+            
+              { this.state.selectedPark ? 
+                <button className="detailClick" onClick={() => {
+                  this.setState({detailClick: !this.state.detailClick})
+                  }} slot="hotspot-hand" data-position="-0.54 0.93 0.1" data-normal="-0.73 0.05 0.69">
+                    {this.state.detailClick ? <div id="annotation"> {this.state.selectedPark.name}  </div> : null }
+                </button> : null
+
+              }
+              
+              { this.state.selectedPark ? 
+               <button className="infoClick" onClick={() => {
+                  this.setState({infoClick: !this.state.infoClick})
+                  }} slot="hotspot-foot" data-position="0 1.75 0.35" data-normal="0 0 1">
+                    {this.state.infoClick ? <div id="annotation"> {this.state.selectedPark.description.substring (0,99) } </div> : null }
+                </button> : null
+              }            
+        
           </model-viewer>         
         </div>
         </Marker>
@@ -182,12 +218,14 @@ export default class App extends React.Component {
           <Popup  className = "marker-pop-up" latitude={this.state.selectedPark.latitude} 
           longitude={this.state.selectedPark.longitude}
           onClose={()=>{
-            this.setState({selectedPark: ""},)
+            this.setState({selectedPark: ""},
+            this.zoomOuter())
+
             }} 
           >
             <div> 
               <div className="marker-div"> 
-                <h4> {this.state.selectedPark.name} </h4>
+                
               </div>
             </div>
           </Popup>
