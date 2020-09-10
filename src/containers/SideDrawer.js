@@ -11,7 +11,7 @@ export default class SideDrawer extends React.Component{
 			<div className = "side-drawer">
 				<NewImageForm NewImageFormSubmit={this.props.NewImageFormSubmit}/>
 				<ListSelect  renderCurrentList={this.props.renderCurrentList} ListSelectHandler={this.props.ListSelectHandler} firstListRender={this.props.firstListRender}/>
-				<RenderLocationList numListChoice={this.props.numListChoice} LocationListSelector={this.props.LocationListSelector} locations ={this.props.locations}/>
+				<RenderLocationList currentList = {this.props.currentList} numListChoice={this.props.numListChoice} LocationListSelector={this.props.LocationListSelector} locations ={this.props.locations}/>
 			</div>
 		</div>
 		)

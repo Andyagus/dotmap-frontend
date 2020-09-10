@@ -18,14 +18,14 @@ export default class LocationListHandler extends React.Component{
 	render(){
 		let num = this.props.num+1
 		let locationName = this.props.location.name
-		
+		let currentList = this.props.currentList
 		return(
 			
 			<div>
 				<div class="location-list"> 
 					
 					<p> {num}</p>
-					<h4   
+					<h4
 
 					className={this.state.selectedLocation ? 'active-link': 'passive-link'} 
 					onClick={() => {this.clickHandler()}}> 

@@ -60,32 +60,43 @@ width:100%;
 .marker-div{
 }
 
-.side-drawer{
-
-  background-color: grey;
-  height: 100%;
-  width: 320px;
-
-  padding: 30px;
-}
-
-.right-side-drawer{
-  background-color: grey;
-  position: relative;
-  float: right;
-  width: 300px;
-  height: 100%;
-  padding: 20px;
-}
-
-
 .sd-parent{
+  opacity: .8;
+  background-color: #EBEBEB;
+
+  transition: transform .25s cubic-bezier(.6,.1,.27,1.02),-webkit-transform .25s cubic-bezier(.6,.1,.27,1.02);
   width: 20%;
   height: 100%;
   position: relative;
   float: left;
+  border-radius: 10px;
   display: inline;
+    box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+
 }
+
+
+.side-drawer{
+  height: 30%;
+  margin: 20px;
+  width: 320px;
+  border-radius: 20px;
+  padding: 30px;
+  transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+
+}
+
+.right-side-drawer{
+  background-color: #253238;
+  position: relative;
+  float: right;
+  width: 400px;
+  height: 100%;
+  color: white;
+
+}
+
+
 
 
 .sd-parent-right{
@@ -100,7 +111,6 @@ width:100%;
 .marker-pop-up{
   background-color: none;
 }
-
 
 
 .location-list p{
@@ -178,3 +188,118 @@ button.detailClick{
     background-color: transparent;
     background-color: blue;
   }
+
+  .inputfile{
+    background: rgba(100, 100, 100, 1);    
+    width: 100%;
+    height: 40px;
+    border-radius: 10px;
+  }
+
+.inputfile {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+
+}
+.inputfile + label {
+    font-size: 1.25em;
+    font-weight: 700;
+    color: white;
+    background-color: black;
+    display: inline-block;
+}
+
+.inputfile:focus + label,
+.inputfile + label:hover {
+    background-color: red;
+}
+
+.label-thang{
+  background-color: white;
+  border-radius: 10px;
+  width: 100%;
+
+  padding-left: 100px;
+  padding-right: 100px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+}
+
+.label-thang:active{
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+}
+
+input[type="submit"]{
+  margin-top: 20px;
+  box-shadow: none;
+  border:nones;
+  text-decoration: underline;
+  height: 30px;
+  width: 70px;
+  box-shadow: 0px 0px 0px transparent;
+  border: 0px solid transparent;
+  text-shadow: 0px 0px 0px transparent;
+}
+
+.listSelect{
+  background-color: white;
+  border-radius: 10px;
+  padding:5px;
+  width: 100%;
+  height: 40px;
+  border: none;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+
+}
+
+.listSelect:active{
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+}
+
+.mahdetails{
+  padding-left: 20px;
+  padding-right: 20px;
+}
+.mahdetails p{
+  font-size: 14px;
+}
+
+.hide-show-bar{
+      box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+
+    width: 200px;
+    height: 100px; /* as the half of the width */
+    border-top-left-radius: 110px;  /* 100px of height + 10px of border */
+    border-top-right-radius: 110px; /* 100px of height + 10px of border */
+    border: 10px solid gray;
+    border-bottom: 0;
+    transform: rotate(90deg);
+  box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+
+  color: red;
+  box-shadow: none;
+  border:nones;
+  text-decoration: underline;
+  height: 30px;
+  width: 70px;
+  border: 0px solid transparent;
+  text-shadow: 0px 0px 0px transparent;
+  position: relative;
+  margin-top: 25%;
+  margin-left: -1%;
+}
+
+.rotateImg{
+  transform: rotate(90deg);
+}
+
+*:focus {
+    outline: 0 !important;
+}

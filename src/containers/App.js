@@ -22,7 +22,7 @@ export default class App extends React.Component {
     },
     locations: [],
     selectedPark: null,
-    clickDraw: true,
+    clickDraw: false,
     currentList: {},
     armodel: [],
     modelUrl: []
@@ -163,13 +163,13 @@ export default class App extends React.Component {
       <ReactMapGL
         {...this.state.viewport}
         mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
-        //mapStyle="mapbox://styles/reckoner655/ckea4ate26ngo19mpumbc4brw"
+        mapStyle="mapbox://styles/reckoner655/ckex3g8ar0ja519p59a247nev"
         onViewportChange={this._onViewportChange}
       >
 
-      <button onClick={this.sideDrawerClickHandler}> {this.state.clickDraw ? "Hide SideBar" : "Show SideBar"}</button>
+      <button className="hide-show-bar" onClick={this.sideDrawerClickHandler}> {this.state.clickDraw ? <img className="rotateImg" src={process.env.PUBLIC_URL + '/front.svg'} /> :  <img className="rotateImg" src={process.env.PUBLIC_URL + '/back.svg'} />}</button>
       
-      {this.state.clickDraw ? <SideDrawer locations={this.state.locations} NewImageFormSubmit={this.NewImageFormSubmit} firstListRender={this.firstListRender} goToViewport={this.goToViewport}  ListSelectHandler={this.ListSelectHandler} renderCurrentList={this.renderCurrentList} numListChoice={this.numListChoice}/> : null }
+      {this.state.clickDraw ? <SideDrawer currentList = {this.state.currentList} locations={this.state.locations} NewImageFormSubmit={this.NewImageFormSubmit} firstListRender={this.firstListRender} goToViewport={this.goToViewport}  ListSelectHandler={this.ListSelectHandler} renderCurrentList={this.renderCurrentList} numListChoice={this.numListChoice}/> : null }
       
       {this.state.selectedPark ? <RightSideDrawer selectedPark={this.state.selectedPark}/> : null}
 

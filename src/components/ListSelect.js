@@ -44,11 +44,7 @@ export default class ListSelect extends React.Component{
 		<div>
 			<div> 
 				<h4> Your Lists </h4>
-				<button onClick={() => {
-					alert("share with other user choose user from dropdown list to share with")
-					}}> share list </button>
-
-				<select onChange={(e) => {
+				<select className="listSelect" onChange={(e) => {
 					this.props.ListSelectHandler(e)
 					}}>
 				  {this.state.lists.map(user => <option value={user.id}>{user.name}</option>)}
@@ -60,9 +56,11 @@ export default class ListSelect extends React.Component{
   			<input type="text" placeholder="New List" value={this.state.list} onChange={(e)=>{
   				this.setState({list: e.target.value})
   				}}/>
-  			<input type="submit" value="Submit" />
+  			<input class="submitdown" type="submit" value="Submit" />
 
 			</form>
+		 <hr>
+		 </hr>
 		</div>
 		)
 	}

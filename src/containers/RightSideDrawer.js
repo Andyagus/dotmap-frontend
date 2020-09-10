@@ -11,10 +11,11 @@ export default class RightSideDrawer extends React.Component{
 		return(
 				<div className="sd-parent-right">
 					<div className="right-side-drawer">
-						<ImageGallery images={this.props.selectedPark.images}/>
-
-						<h3> {this.props.selectedPark.name} </h3>
-						<p class="sp-description"> {this.props.selectedPark.description ? this.props.selectedPark.description.substring (0,1000) : "There is no available information in this landmark"} </p>
+						<div> <ImageGallery images={this.props.selectedPark.images}/> </div> 
+						<div className="mahdetails">
+							<h3> {this.props.selectedPark.name} </h3>
+							<p class="sp-description"> {this.props.selectedPark.description ? this.props.selectedPark.description.substring (0,1000) : "There is no available information in this landmark"} </p>
+						</div>
 					</div>
 
 				</div>
