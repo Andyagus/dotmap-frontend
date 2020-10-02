@@ -5,10 +5,10 @@
 ## Overview 
 - Dot Map is an image sharing platform that uses Image Recognition to find and 
 locates where the images were taken
-- Watch a demo [here]("https://vimeo.com/458211076")
+- Watch a demo [here](https://vimeo.com/458211076)
 
 ## Functionality 
-- Utilized the [Mapbox GL React Wrapper]("https://github.com/visgl/react-map-gl")
+- Utilized the [Mapbox GL React Wrapper](https://github.com/visgl/react-map-gl)
 - Analyze image tags and location information 
 - Image Recognition locates landmarks and places marker on map (Google Vision API)
 - Display 3D model on the Map (Model Viewer for the placement of model and Google Poly for the model itself)
