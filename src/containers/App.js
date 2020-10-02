@@ -30,25 +30,6 @@ export default class App extends React.Component {
   }
 
 
-  componentDidMount(){
-    this.state.locations.map(location => {
-    fetch(`https://poly.googleapis.com/v1/assets?keywords=bear&format=gltf&key=AIzaSyD6scPIQ_u-_5E62s6mYDvEt5vkWTHE0R4`)
-    .then(resp => resp.json())
-    .then(resp => {
-    let armodel = resp.assets
-    armodel = armodel.find(a => a.displayName.includes("bear"))
-    armodel = armodel.formats.find(a => a.formatType.includes("GLTF2"))
-    let root = armodel.root.url
-    let arr = [...this.state.modelUrl, resp]
-    this.setState({modelUrl: arr})
-    }
-    )
-    })
-
-
-  }
-
-
   mapStyleHandler=(value) => {
     if(value === "decimel"){
       console.log("decimal")
