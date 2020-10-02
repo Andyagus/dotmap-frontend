@@ -29,10 +29,8 @@ export default class App extends React.Component {
     mapStyle: "mapbox://styles/reckoner655/ckex3g8ar0ja519p59a247nev"
   }
 
-
   mapStyleHandler=(value) => {
     if(value === "decimel"){
-      console.log("decimal")
       this.setState({mapStyle: "mapbox://styles/reckoner655/ckex80fhh0yrr19nsp9izb251"})
     }
     if(value==="blueprint"){
