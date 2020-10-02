@@ -22,10 +22,11 @@ export default class App extends React.Component {
     },
     locations: [],
     selectedPark: null,
-    clickDraw: false,
+    clickDraw: true,
     currentList: {},
     armodel: [],
-    modelUrl: []
+    modelUrl: [],
+    mapStyle: "mapbox://styles/reckoner655/ckex3g8ar0ja519p59a247nev"
   }
 
 
@@ -47,6 +48,26 @@ export default class App extends React.Component {
 
   }
 
+
+  mapStyleHandler=(value) => {
+    if(value === "decimel"){
+      console.log("decimal")
+      this.setState({mapStyle: "mapbox://styles/reckoner655/ckex80fhh0yrr19nsp9izb251"})
+    }
+    if(value==="blueprint"){
+      this.setState({mapStyle: "mapbox://styles/reckoner655/ckea4ate26ngo19mpumbc4brw"})
+    }
+    if(value==="frank"){
+      this.setState({mapStyle: "mapbox://styles/reckoner655/ckex3g8ar0ja519p59a247nev"})
+    }
+    if(value==="standard"){
+      this.setState({mapStyle: "mapbox://styles/reckoner655/ckex8egj60rk01apit4gtiwx5"})
+    }
+    if(value==="japan"){
+      this.setState({mapStyle: "mapbox://styles/reckoner655/ckex8fydg0d8h19msipla3tw7"})
+    }
+
+  }
 
   numListChoice = (obj) => {
     this.setState({selectedPark: obj}, ()=>{
@@ -163,13 +184,13 @@ export default class App extends React.Component {
       <ReactMapGL
         {...this.state.viewport}
         mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
-        mapStyle="mapbox://styles/reckoner655/ckex3g8ar0ja519p59a247nev"
+        mapStyle={this.state.mapStyle}
         onViewportChange={this._onViewportChange}
       >
 
       <button className="hide-show-bar" onClick={this.sideDrawerClickHandler}> {this.state.clickDraw ? <img className="rotateImg" src={process.env.PUBLIC_URL + '/front.svg'} /> :  <img className="rotateImg" src={process.env.PUBLIC_URL + '/back.svg'} />}</button>
       
-      {this.state.clickDraw ? <SideDrawer currentList = {this.state.currentList} locations={this.state.locations} NewImageFormSubmit={this.NewImageFormSubmit} firstListRender={this.firstListRender} goToViewport={this.goToViewport}  ListSelectHandler={this.ListSelectHandler} renderCurrentList={this.renderCurrentList} numListChoice={this.numListChoice}/> : null }
+      {this.state.clickDraw ? <SideDrawer mapStyleHandler = {this.mapStyleHandler} currentList = {this.state.currentList} locations={this.state.locations} NewImageFormSubmit={this.NewImageFormSubmit} firstListRender={this.firstListRender} goToViewport={this.goToViewport}  ListSelectHandler={this.ListSelectHandler} renderCurrentList={this.renderCurrentList} numListChoice={this.numListChoice}/> : null }
       
       {this.state.selectedPark ? <RightSideDrawer selectedPark={this.state.selectedPark}/> : null}
 

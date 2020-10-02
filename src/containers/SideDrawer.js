@@ -2,6 +2,7 @@ import React from 'react'
 import NewImageForm from '../components/NewImageForm'
 import ListSelect from '../components/ListSelect'
 import RenderLocationList from '../components/RenderLocationList'
+import MapSelect from '../components/MapSelect'
 
 export default class SideDrawer extends React.Component{
 
@@ -12,6 +13,7 @@ export default class SideDrawer extends React.Component{
 				<NewImageForm NewImageFormSubmit={this.props.NewImageFormSubmit}/>
 				<ListSelect  renderCurrentList={this.props.renderCurrentList} ListSelectHandler={this.props.ListSelectHandler} firstListRender={this.props.firstListRender}/>
 				<RenderLocationList currentList = {this.props.currentList} numListChoice={this.props.numListChoice} LocationListSelector={this.props.LocationListSelector} locations ={this.props.locations}/>
+				<MapSelect mapStyleHandler={this.props.mapStyleHandler}/>
 			</div>
 		</div>
 		)
