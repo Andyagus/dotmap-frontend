@@ -3,9 +3,9 @@
 ### Flatiron Mod 5 Solo Project
 
 ## Overview 
-Dot Map is an image sharing platform that uses Image Recognition to find and 
+- Dot Map is an image sharing platform that uses Image Recognition to find and 
 locates where the images were taken
-Watch a demo [here]("https://vimeo.com/458211076")
+- Watch a demo [here]("https://vimeo.com/458211076")
 
 ## Functionality 
 - Utilized the [Mapbox GL React Wrapper]("https://github.com/visgl/react-map-gl")
