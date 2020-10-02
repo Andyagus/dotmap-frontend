@@ -15,7 +15,7 @@ Watch a demo [here]("https://vimeo.com/458211076")
 - Sourced information on the lankmark through wikimedia API 
 - Stored User Images on Cloudinary 
 
-##Future Plans 
+## Future Plans 
 - Currently the models are being hard-coded to display since it was difficult to find the correct models through searching the google poly models that work directly with model viewer and I wanted to focus more on the display of the models than the search functionality itself - future plans would be to get this working
 
 - I started progressing dot map into an augmented reality platform and hoping to tie in user images with 3d models so that the images can inform an even greater experience than the images themselves
